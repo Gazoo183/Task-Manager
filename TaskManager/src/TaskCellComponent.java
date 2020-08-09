@@ -56,8 +56,8 @@ public class TaskCellComponent extends JPanel{
 		delete.setBackground(SystemColor.controlHighlight);
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(task.keep)
-					Main.removeDirectory(task.directory);
+				if(task.getKeep())
+					Main.removeDirectory(task.getDirectory());
 				Task.removeTask(task);
 				
 			}
@@ -75,13 +75,13 @@ public class TaskCellComponent extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				if(task.getDescriptionType()==DescriptionType.FILE) {
 					try {
-						Desktop.getDesktop().open(new File(task.description));
+						Desktop.getDesktop().open(new File(task.getDirectory()));
 					} catch (IOException e) {
 						e.printStackTrace();
 						new InfoDialog("Application could not open the file");
 					}
 				} else {
-					new InfoDialog(task.description);
+					new InfoDialog(task.getDescription());
 				}
 				
 			}
@@ -90,10 +90,10 @@ public class TaskCellComponent extends JPanel{
 		handIn.setBackground(SystemColor.controlHighlight);
 		handIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(task.keep) {
+				if(task.getKeep()) {
 					String solution = JOptionPane.showInputDialog(null, "Enter solution's path", "Hand in", JOptionPane.QUESTION_MESSAGE);
 					if(solution!=null && Main.isValidPath(solution)) {
-						Main.copyFile(solution, task.directory);
+						Main.copyFile(solution, task.getDirectory());
 						Task.removeTask(task);
 					} else if(solution!=null) {
 						new InfoDialog("This is not a valid path");
@@ -125,9 +125,9 @@ public class TaskCellComponent extends JPanel{
 		this.table=table;
 		this.task=task;
 		
-		this.lblSubject.setText(task.subject);
-		this.lblType.setText(task.taskType.toString());
-		this.lblDeadline.setText(task.deadline.toString());
+		this.lblSubject.setText(task.getSubject());
+		this.lblType.setText(task.getTaskType().toString());
+		this.lblDeadline.setText(task.getDeadline().toString());
 		
 		if(isSelected) {
 			btnsPanel.setVisible(true);

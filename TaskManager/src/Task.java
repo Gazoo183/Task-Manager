@@ -21,13 +21,13 @@ enum DescriptionType {TEXT, FILE}
 public class Task implements Serializable {
 	public static Map<Class, List> extents = new HashMap<>();
 	
-	public String subject;
-	public TaskType taskType;
-	public String description;
-	public LocalDate deadline;
-	public boolean keep;
-	public String directory;
-	public int importanceLevel;
+	private String subject;
+	private TaskType taskType;
+	private String description;
+	private LocalDate deadline;
+	private boolean keep;
+	private String directory;
+	private int importanceLevel;
 	
 	public Task(String subject, TaskType taskType, String description, String deadline, boolean keep) {
 		this.subject = subject;
@@ -127,6 +127,33 @@ public class Task implements Serializable {
 		
 	}
 	
+	/*
+	 * Attribute getters
+	 */
+	
+		public boolean getKeep() {
+			return keep;
+		}
+		
+		public String getDirectory() {
+			return directory;
+		}
+	
+		public String getDescription() {
+			return description;
+		}
+		
+		public String getSubject() {
+			return subject;
+		}
+		
+		public TaskType getTaskType() {
+			return taskType;
+		}
+		
+		public LocalDate getDeadline() {
+			return deadline;
+		}
 	/*
 	 * Other
 	 */
